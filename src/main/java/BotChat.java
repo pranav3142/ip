@@ -62,13 +62,46 @@ public class BotChat {
                     System.out.println(line);
                 }
 
-            } else {
-                    // add tasks feature
-                    tasks[count] = new Task(input);
-                    count++;
-                    System.out.println(line);
-                    System.out.println("added: " + input);
-                    System.out.println(line);
+            } else if (input.startsWith("todo")) {
+                String description = input.substring(5).trim();
+                tasks[count] = new Todo(description);
+                count++;
+                System.out.println(line);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("    "+ tasks[count-1]);
+                System.out.println("Now you have " + count + " tasks in the list.");
+                System.out.println(line);
+
+
+            } else if (input.startsWith("deadline")) {
+                String removeDeadline = input.substring(9).trim();
+                String[] remaining = removeDeadline.split("/by");
+                tasks[count] = new Deadline(remaining[0].trim(), remaining[1].trim());
+                count++;
+                System.out.println(line);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("    "+ tasks[count-1]);
+                System.out.println("Now you have " + count + " tasks in the list.");
+                System.out.println(line);
+
+
+            } else if (input.startsWith("event")) {
+                String removeEvent = input.substring(6).trim();
+                String[] remaining = removeEvent.split("/from");
+                String description = remaining[0].trim();
+                String [] remaining2 = remaining[1].split("/to");
+                String from = remaining2[0].trim();
+                String to = remaining2[1].trim();
+
+                tasks[count] = new Event(description, from, to);
+                count++;
+                System.out.println(line);
+                System.out.println("Got it. I've added this task:");
+                System.out.println("    "+ tasks[count-1]);
+                System.out.println("Now you have " + count + " tasks in the list.");
+                System.out.println(line);
+
+
             }
 
         }
