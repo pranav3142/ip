@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BotChat {
@@ -11,7 +12,7 @@ public class BotChat {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int count = 0;
-        Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<>();
 
         String logo = "BotChat";
         String line = "____________________________________________________________";
@@ -35,8 +36,8 @@ public class BotChat {
                     // list feature
                     System.out.println(line);
                     System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < count; i++) {
-                        System.out.println((i + 1) + ". " + tasks[i]);
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println((i + 1) + ". " + tasks.get(i).toString());
 
                     }
                     System.out.println(line);
@@ -44,22 +45,22 @@ public class BotChat {
                 } else if (input.startsWith("mark")) {
                     //mark feature
                     Integer index = getInt(input);
-                    if (index != null && index <= count && index > 0) {
-                        tasks[index - 1].markAsDone();
+                    if (index != null && index <= tasks.size() && index > 0) {
+                        tasks.get(index-1).markAsDone();
                         System.out.println(line);
                         System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(tasks[index - 1]);
+                        System.out.println(tasks.get(index - 1));
                         System.out.println(line);
                     }
 
                 } else if (input.startsWith("unmark")) {
                     //unmark feature
                     Integer index = getInt(input);
-                    if (index != null && index <= count && index > 0) {
-                        tasks[index - 1].markAsNotDone();
+                    if (index != null && index <= tasks.size() && index > 0) {
+                        tasks.get(index - 1).markAsNotDone();
                         System.out.println(line);
                         System.out.println("OK, I've unmarked this task as not done yet:");
-                        System.out.println(tasks[index - 1]);
+                        System.out.println(tasks.get(index - 1));
                         System.out.println(line);
                     }
 
@@ -69,12 +70,13 @@ public class BotChat {
                     }
                     String description = input.substring(5).trim();
 
-                    tasks[count] = new Todo(description);
-                    count++;
+                    Task t = new Todo(description);
+                    tasks.add(t);
+
                     System.out.println(line);
                     System.out.println("Got it. I've added this task:");
-                    System.out.println("    " + tasks[count - 1]);
-                    System.out.println("Now you have " + count + " tasks in the list.");
+                    System.out.println("    " + t.toString());
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     System.out.println(line);
 
 
@@ -94,12 +96,13 @@ public class BotChat {
                         throw new BotChatException("OH NO! deadline is missing a deadline");
                     }
 
-                    tasks[count] = new Deadline(remaining[0].trim(), remaining[1].trim());
-                    count++;
+                    Task t = new Deadline(remaining[0].trim(), remaining[1].trim());
+                    tasks.add(t);
+                    //count++;
                     System.out.println(line);
                     System.out.println("Got it. I've added this task:");
-                    System.out.println("    " + tasks[count - 1]);
-                    System.out.println("Now you have " + count + " tasks in the list.");
+                    System.out.println("    " + t.toString());
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     System.out.println(line);
 
 
@@ -129,14 +132,28 @@ public class BotChat {
                         throw new BotChatException("OH NO! event is missing a from or to date/time");
                     }
 
-                    tasks[count] = new Event(description, from, to);
-                    count++;
+                    Task t = new Event(description, from, to);
+                    tasks.add(t);
+                    //count++;
                     System.out.println(line);
                     System.out.println("Got it. I've added this task:");
-                    System.out.println("    " + tasks[count - 1]);
-                    System.out.println("Now you have " + count + " tasks in the list.");
+                    System.out.println("    " + t.toString());
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     System.out.println(line);
 
+
+                }else if (input.startsWith("delete")){
+                    if (input.length() <= 7) {
+                        throw new BotChatException("OH NO! delete is missing a value");
+                    }
+                    Integer index = getInt(input);
+                    if (index != null && index > 0 && index <= tasks.size()) {
+                        Task remove = tasks.remove(index-1);
+                        System.out.println(line);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println("    " + remove.toString());
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    }
 
                 }else{
                     throw new BotChatException("OH NO! I DON'T KNOW WHAT COMMAND IT IS");
