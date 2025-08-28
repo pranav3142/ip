@@ -12,7 +12,10 @@ public class BotChat {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int count = 0;
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks;
+
+        Store store = new Store("./data/BotChat.txt");
+        tasks = store.loadTasks();
 
         String logo = "BotChat";
         String line = "____________________________________________________________";
@@ -52,6 +55,7 @@ public class BotChat {
                         System.out.println(tasks.get(index - 1));
                         System.out.println(line);
                     }
+                    store.saveTasks(tasks);
 
                 } else if (input.startsWith("unmark")) {
                     //unmark feature
@@ -63,6 +67,7 @@ public class BotChat {
                         System.out.println(tasks.get(index - 1));
                         System.out.println(line);
                     }
+                    store.saveTasks(tasks);
 
                 } else if (input.startsWith("todo")) {
                     if(input.length() <= 5) {
@@ -78,6 +83,7 @@ public class BotChat {
                     System.out.println("    " + t.toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     System.out.println(line);
+                    store.saveTasks(tasks);
 
 
                 } else if (input.startsWith("deadline")) {
@@ -104,6 +110,7 @@ public class BotChat {
                     System.out.println("    " + t.toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     System.out.println(line);
+                    store.saveTasks(tasks);
 
 
                 } else if (input.startsWith("event")) {
@@ -140,6 +147,7 @@ public class BotChat {
                     System.out.println("    " + t.toString());
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     System.out.println(line);
+                    store.saveTasks(tasks);
 
 
                 }else if (input.startsWith("delete")){
@@ -154,6 +162,7 @@ public class BotChat {
                         System.out.println("    " + remove.toString());
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     }
+                    store.saveTasks(tasks);
 
                 }else{
                     throw new BotChatException("OH NO! I DON'T KNOW WHAT COMMAND IT IS");
