@@ -154,6 +154,18 @@ public class Parser {
             return;
 
         }
+
+        if (input.startsWith("find")) {
+            if (input.length() <= 5) {
+                throw new BotChatException("OH NO! find is missing a value");
+            }
+
+            String find = input.substring(5).trim();
+            TaskList findResults = tasks.find(find);
+            ui.displayFind(findResults);
+            return;
+        }
+
         else {
             // Throw exception when encountered with unknown command.
             throw new BotChatException("OH NO! I DON'T KNOW WHAT COMMAND IT IS");
