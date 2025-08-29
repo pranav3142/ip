@@ -25,21 +25,21 @@ public abstract class Task {
      *
      * @return string to be displayed in user interface.
      */
-    public String getStatusIcon(){
-        return (isDone? "X" : " ");
+    public String getStatusIcon() {
+        return (isDone ? "X" : " ");
     }
 
     /**
      * Marks task as done.
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 
     /**
      * Marks task as undone.
      */
-    public void markAsNotDone(){
+    public void markAsNotDone() {
         this.isDone = false;
     }
 

@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
  * Represents a task that has a from and to date and time.
  */
 public class Event extends Task {
-    protected LocalDateTime from;
-    protected LocalDateTime to;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
     /**
      * Constructs a tasks that has a from and to date and time.
@@ -24,7 +24,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String toStorage(){
+    public String toStorage() {
         return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + from + " | " + to;
     }
 

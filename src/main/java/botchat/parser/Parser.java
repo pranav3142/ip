@@ -19,7 +19,7 @@ public class Parser {
      * @param input User input string.
      * @return index of task in TaskList.
      */
-    private static Integer getInt(String input){
+    private static Integer getInt(String input) {
 
         String[] words = input.split(" ");
         return Integer.parseInt(words[1]);
@@ -59,8 +59,8 @@ public class Parser {
         if (input.startsWith("mark")) {
             Integer index = getInt(input);
             if (index != null && index <= tasks.size() && index > 0) {
-                tasks.get(index-1).markAsDone();
-                ui.displayMark(tasks.get(index-1));
+                tasks.get(index - 1).markAsDone();
+                ui.displayMark(tasks.get(index - 1));
             }
             store.saveTasks(tasks.getTasks());
             return;
@@ -69,15 +69,15 @@ public class Parser {
         if (input.startsWith("unmark")) {
             Integer index = getInt(input);
             if (index != null && index <= tasks.size() && index > 0) {
-                tasks.get(index-1).markAsNotDone();
-                ui.displayUnmark(tasks.get(index-1));
+                tasks.get(index - 1).markAsNotDone();
+                ui.displayUnmark(tasks.get(index - 1));
             }
             store.saveTasks(tasks.getTasks());
             return;
         }
 
         if (input.startsWith("todo")) {
-            if(input.length() <= 5) {
+            if (input.length() <= 5) {
                 throw new BotChatException("OH NO! todo is missing a description");
             }
             String description = input.substring(5).trim();
@@ -89,17 +89,17 @@ public class Parser {
         }
 
         if (input.startsWith("deadline")) {
-            if(input.length() <= 9) {
+            if (input.length() <= 9) {
                 throw new BotChatException("OH NO! deadline is missing a description");
             }
 
             String removeDeadline = input.substring(9).trim();
             String[] remaining = removeDeadline.split("/by");
 
-            if(remaining.length < 2) {
+            if (remaining.length < 2) {
                 throw new BotChatException("OH NO! deadline is missing a deadline");
             }
-            if(remaining[1].trim().isEmpty()) {
+            if (remaining[1].trim().isEmpty()) {
                 throw new BotChatException("OH NO! deadline is missing a deadline");
             }
 
@@ -111,27 +111,27 @@ public class Parser {
         }
 
         if (input.startsWith("event")) {
-            if(input.length() <= 6) {
+            if (input.length() <= 6) {
                 throw new BotChatException("OH NO! event is missing a description");
             }
             String removeEvent = input.substring(6).trim();
             String[] remaining = removeEvent.split("/from");
 
-            if(remaining.length < 2) {
+            if (remaining.length < 2) {
                 throw new BotChatException("OH NO! event must include a /from and /to");
             }
 
             String description = remaining[0].trim();
             String[] remaining2 = remaining[1].split("/to");
 
-            if(remaining2.length < 2) {
+            if (remaining2.length < 2) {
                 throw new BotChatException("OH NO! event must include a /from and /to");
             }
 
             String from = remaining2[0].trim();
             String to = remaining2[1].trim();
 
-            if(to.isEmpty() || from.isEmpty()) {
+            if (to.isEmpty() || from.isEmpty()) {
                 throw new BotChatException("OH NO! event is missing a from or to date/time");
             }
             Task t = new Event(description, from, to);
@@ -147,15 +147,15 @@ public class Parser {
             }
             Integer index = getInt(input);
             if (index != null && index > 0 && index <= tasks.size()) {
-                Task remove = tasks.deleteTask(index-1);
+                Task remove = tasks.deleteTask(index - 1);
                 ui.displayDelete(remove, tasks);
             }
             store.saveTasks(tasks.getTasks());
             return;
 
         }
-        else{
-            //Throw exception when encountered with unknown command.
+        else {
+            // Throw exception when encountered with unknown command.
             throw new BotChatException("OH NO! I DON'T KNOW WHAT COMMAND IT IS");
         }
 
