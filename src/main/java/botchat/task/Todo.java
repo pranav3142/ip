@@ -1,6 +1,14 @@
 package botchat.task;
 
+/**
+ * Represents a task with only a description.
+ */
 public class Todo extends Task {
+
+    /**
+     * Constructs a task with a description.
+     * @param description the String description of a task.
+     */
     public Todo(String description){
         super(description);
     }
