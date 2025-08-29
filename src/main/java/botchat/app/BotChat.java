@@ -9,7 +9,7 @@ import botchat.ui.Ui;
  * Represents the main entry class for the BotChat Chatbot.
  * <p>
  * Responsible for initialising the components and starting
- * the application
+ * the application.
  */
 
 public class BotChat {
@@ -18,10 +18,10 @@ public class BotChat {
     private Ui ui;
 
     /**
-     * Constructs a new BotChat instance
+     * Constructs a new BotChat instance.
      *
      * @param filepath path to where tasks will be loaded
-     *                 and stored
+     *                 and stored.
      */
     public BotChat(String filepath) {
         ui = new Ui();
@@ -31,10 +31,10 @@ public class BotChat {
     }
 
     /**
-     * Runs the BotChat ChatBot
+     * Runs the BotChat ChatBot.
      * <p>
      * Displays Welcome message and reads users commands,
-     * exits on bye command
+     * exits on bye command.
      */
     public void run(){
         ui.displayWelcome();
@@ -56,8 +56,8 @@ public class BotChat {
     }
 
     /**
-     * Start point of program
-     * @param args not in use
+     * Start point of program.
+     * @param args not in use.
      */
     public static void main(String[] args){
         new BotChat("./data/botchat.app.BotChat.txt").run();

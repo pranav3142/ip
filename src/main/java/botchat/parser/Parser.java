@@ -9,19 +9,41 @@ import botchat.task.TaskList;
 import botchat.task.Todo;
 import botchat.ui.Ui;
 
+/**
+ * Parses user inputs from BotChat into commands.
+ */
 public class Parser {
 
-    private static Integer getInt(String input) {
-        //get integer from input for mark and unmark
+    /**
+     * Returns the index mentioned in the user input.
+     * @param input User input string.
+     * @return index of task in TaskList.
+     */
+    private static Integer getInt(String input){
+
         String[] words = input.split(" ");
         return Integer.parseInt(words[1]);
     }
 
+    /**
+     * Determines if input signals end of program.
+     * @param input the string entered by the user.
+     * @return true if command is bye, false otherwise.
+     */
     public static boolean exit(String input) {
         input = input.trim();
         return input.equals("bye");
     }
 
+    /**
+     * Interprets and executes user's command.
+     *
+     * @param input string entered by user.
+     * @param tasks the list of tasks to be changed.
+     * @param ui the user interface for showing the responses.
+     * @param store to store the tasks.
+     * @throws BotChatException if the command is invalid.
+     */
     public static void command(String input, TaskList tasks, Ui ui, Store store) throws BotChatException {
         input = input.trim();
         if (input.equals("bye")) {
@@ -133,6 +155,7 @@ public class Parser {
 
         }
         else{
+            //Throw exception when encountered with unknown command.
             throw new BotChatException("OH NO! I DON'T KNOW WHAT COMMAND IT IS");
         }
 

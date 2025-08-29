@@ -4,11 +4,19 @@ import botchat.util.DateTime;
 
 import java.time.LocalDateTime;
 
-
+/**
+ * Represents a task that has a from and to date and time.
+ */
 public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
 
+    /**
+     * Constructs a tasks that has a from and to date and time.
+     * @param description the String description of a task.
+     * @param from the starting date and time of a task, in yyyy-MM-dd HH:mm
+     * @param to the ending date and time of a task, in yyyy-MM-dd HH:mm.
+     */
     public Event(String description, String from, String to) {
         super(description);
         this.from = LocalDateTime.parse(from, DateTime.INPUT_DATETIME);

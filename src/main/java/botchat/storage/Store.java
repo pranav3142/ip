@@ -9,14 +9,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles the loading and storing of the tasks to hard drive.
+ */
 public class Store {
     private final String filepath;
 
+    /**
+     * Constructs a store that manages the reading
+     * and writing of information.
+     * @param filepath path to the storage file.
+     */
     public Store(String filepath) {
         this.filepath = filepath;
     }
 
-    public ArrayList<Task> loadTasks(){
+    /**
+     * Load tasks from the storage file.
+     * <p>
+     * Creates the file and its parent directory if it is missing.
+     * @return a list of tasks read from the file.
+     */
+    public ArrayList<Task> loadTasks() {
         File file = new File(filepath);
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -51,6 +65,10 @@ public class Store {
 
     }
 
+    /**
+     * Saves list of tasks into the storage file.
+     * @param tasks the list of tasks to be stored.
+     */
     public void saveTasks(ArrayList<Task> tasks){
         File file = new File(filepath);
 

@@ -1,28 +1,61 @@
 package botchat.task;
 
+/**
+ * Represents a general task that cannot be instantiated.
+ */
 public abstract class Task {
+    /** Description of the task.*/
     protected String description;
+
+    /** Completion status of task*/
     protected boolean isDone;
 
+    /**
+     * Constructs a Task with a description.
+     *
+     * @param description the String description of a task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Converts completion of task into user interface X.
+     *
+     * @return string to be displayed in user interface.
+     */
     public String getStatusIcon(){
         return (isDone? "X" : " ");
     }
 
+    /**
+     * Marks task as done.
+     */
     public void markAsDone(){
         this.isDone = true;
     }
 
+    /**
+     * Marks task as undone.
+     */
     public void markAsNotDone(){
         this.isDone = false;
     }
 
+    /**
+     * Returns a string representation of a task for storing.
+     * Each subclass of Task implements their own format.
+     *
+     * @return string representation of a task for storing.
+     */
     public abstract String toStorage();
 
+    /**
+     * Constructs a Task from a string in storage.
+     * @param line the storage string.
+     * @return the task as an object.
+     */
     public static Task convFromStorage(String line) {
         String[] parts = line.split("|");
 
