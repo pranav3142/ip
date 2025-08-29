@@ -1,4 +1,6 @@
-abstract class Task {
+package botchat.task;
+
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
