@@ -13,15 +13,15 @@ import java.util.Scanner;
  * Handles the loading and storing of the tasks to hard drive.
  */
 public class Store {
-    private final String filepath;
+    private final String filePath;
 
     /**
      * Constructs a store that manages the reading
      * and writing of information.
-     * @param filepath path to the storage file.
+     * @param filePath path to the storage file.
      */
-    public Store(String filepath) {
-        this.filepath = filepath;
+    public Store(String filePath) {
+        this.filePath = filePath;
     }
 
     /**
@@ -31,7 +31,7 @@ public class Store {
      * @return a list of tasks read from the file.
      */
     public ArrayList<Task> loadTasks() {
-        File file = new File(filepath);
+        File file = new File(filePath);
         ArrayList<Task> tasks = new ArrayList<>();
 
         File parentFile = file.getParentFile();
@@ -39,7 +39,7 @@ public class Store {
             parentFile.mkdirs();
         }
 
-        if(!file.exists()){
+        if(!file.exists()) {
             try{
                 file.createNewFile();
             }catch (IOException e){
@@ -69,8 +69,8 @@ public class Store {
      * Saves list of tasks into the storage file.
      * @param tasks the list of tasks to be stored.
      */
-    public void saveTasks(ArrayList<Task> tasks){
-        File file = new File(filepath);
+    public void saveTasks(ArrayList<Task> tasks) {
+        File file = new File(filePath);
 
         File parentFile = file.getParentFile();
         if (parentFile != null) {
@@ -80,10 +80,10 @@ public class Store {
         try (FileWriter writer = new FileWriter(file)) {
             for (Task task : tasks) {
                 writer.write(task.toStorage() + "\n");
-                //writer.write(System.lineSeparator());
+
             }
-        } catch (IOException e){
-            System.out.println("Error while saving tasks" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Error while saving tasks: " + e.getMessage());
         }
     }
 
