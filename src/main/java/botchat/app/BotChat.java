@@ -1,5 +1,9 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+package botchat.app;
+
+import botchat.parser.Parser;
+import botchat.storage.Store;
+import botchat.task.TaskList;
+import botchat.ui.Ui;
 
 public class BotChat {
     private Store store;
@@ -33,7 +37,7 @@ public class BotChat {
     }
 
     public static void main(String[] args){
-        new BotChat("../data/BotChat.txt").run();
+        new BotChat("./data/botchat.app.BotChat.txt").run();
     }
 
 //    private static Integer getInt(String input) {
@@ -47,10 +51,10 @@ public class BotChat {
 //        int count = 0;
 //        ArrayList<Task> tasks;
 //
-//        Store store = new Store("./data/BotChat.txt");
+//        botchat.storage.Store store = new botchat.storage.Store("./data/botchat.app.BotChat.txt");
 //        tasks = store.loadTasks();
 //
-//        String logo = "BotChat";
+//        String logo = "botchat.app.BotChat";
 //        String line = "____________________________________________________________";
 //
 //        System.out.println(line);
@@ -104,11 +108,11 @@ public class BotChat {
 //
 //                } else if (input.startsWith("todo")) {
 //                    if(input.length() <= 5) {
-//                        throw new BotChatException("OH NO! todo is missing a description");
+//                        throw new botchat.app.BotChatException("OH NO! todo is missing a description");
 //                    }
 //                    String description = input.substring(5).trim();
 //
-//                    Task t = new Todo(description);
+//                    Task t = new botchat.task.Todo(description);
 //                    tasks.add(t);
 //
 //                    System.out.println(line);
@@ -122,20 +126,20 @@ public class BotChat {
 //                } else if (input.startsWith("deadline")) {
 //
 //                    if(input.length() <= 9) {
-//                        throw new BotChatException("OH NO! deadline is missing a description");
+//                        throw new botchat.app.BotChatException("OH NO! deadline is missing a description");
 //                    }
 //
 //                    String removeDeadline = input.substring(9).trim();
 //                    String[] remaining = removeDeadline.split("/by");
 //
 //                    if(remaining.length < 2) {
-//                        throw new BotChatException("OH NO! deadline is missing a deadline");
+//                        throw new botchat.app.BotChatException("OH NO! deadline is missing a deadline");
 //                    }
 //                    if(remaining[1].trim().isEmpty()) {
-//                        throw new BotChatException("OH NO! deadline is missing a deadline");
+//                        throw new botchat.app.BotChatException("OH NO! deadline is missing a deadline");
 //                    }
 //
-//                    Task t = new Deadline(remaining[0].trim(), remaining[1].trim());
+//                    Task t = new botchat.task.Deadline(remaining[0].trim(), remaining[1].trim());
 //                    tasks.add(t);
 //                    //count++;
 //                    System.out.println(line);
@@ -149,30 +153,30 @@ public class BotChat {
 //                } else if (input.startsWith("event")) {
 //
 //                    if(input.length() <= 6) {
-//                        throw new BotChatException("OH NO! event is missing a description");
+//                        throw new botchat.app.BotChatException("OH NO! event is missing a description");
 //                    }
 //                    String removeEvent = input.substring(6).trim();
 //                    String[] remaining = removeEvent.split("/from");
 //
 //                    if(remaining.length < 2) {
-//                        throw new BotChatException("OH NO! event must include a /from and /to");
+//                        throw new botchat.app.BotChatException("OH NO! event must include a /from and /to");
 //                    }
 //
 //                    String description = remaining[0].trim();
 //                    String[] remaining2 = remaining[1].split("/to");
 //
 //                    if(remaining2.length < 2) {
-//                        throw new BotChatException("OH NO! event must include a /from and /to");
+//                        throw new botchat.app.BotChatException("OH NO! event must include a /from and /to");
 //                    }
 //
 //                    String from = remaining2[0].trim();
 //                    String to = remaining2[1].trim();
 //
 //                    if(to.isEmpty() || from.isEmpty()) {
-//                        throw new BotChatException("OH NO! event is missing a from or to date/time");
+//                        throw new botchat.app.BotChatException("OH NO! event is missing a from or to date/time");
 //                    }
 //
-//                    Task t = new Event(description, from, to);
+//                    Task t = new botchat.task.Event(description, from, to);
 //                    tasks.add(t);
 //                    //count++;
 //                    System.out.println(line);
@@ -185,7 +189,7 @@ public class BotChat {
 //
 //                }else if (input.startsWith("delete")){
 //                    if (input.length() <= 7) {
-//                        throw new BotChatException("OH NO! delete is missing a value");
+//                        throw new botchat.app.BotChatException("OH NO! delete is missing a value");
 //                    }
 //                    Integer index = getInt(input);
 //                    if (index != null && index > 0 && index <= tasks.size()) {
@@ -198,9 +202,9 @@ public class BotChat {
 //                    store.saveTasks(tasks);
 //
 //                }else{
-//                    throw new BotChatException("OH NO! I DON'T KNOW WHAT COMMAND IT IS");
+//                    throw new botchat.app.BotChatException("OH NO! I DON'T KNOW WHAT COMMAND IT IS");
 //                }
-//            } catch (BotChatException e) {
+//            } catch (botchat.app.BotChatException e) {
 //                System.out.println(e.getMessage());
 //            }
 //

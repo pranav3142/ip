@@ -1,6 +1,10 @@
+package botchat.task;
+
+import botchat.util.DateTime;
+
 import java.time.LocalDate;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDate by;
 
     public Deadline(String description, String by){

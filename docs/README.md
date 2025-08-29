@@ -1,4 +1,4 @@
-# BotChat User Guide
+# botchat.app.BotChat User Guide
 
 // Update the title above to match the actual product name
 

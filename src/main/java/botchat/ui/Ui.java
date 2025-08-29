@@ -1,10 +1,14 @@
-import java.util.ArrayList;
+package botchat.ui;
+
+import botchat.task.Task;
+import botchat.task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
     private Scanner scanner = new Scanner(System.in);
     public static final String LINE = "____________________________________________________________";
-    public static final String NAME = "BotChat";
+    public static final String NAME = "botchat.app.BotChat";
 
     public void displayWelcome() {
         System.out.println(LINE);
@@ -41,7 +45,7 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    public void displayAdd(Task t,TaskList tasks) {
+    public void displayAdd(Task t, TaskList tasks) {
         System.out.println(LINE);
         System.out.println("Got it. I've added this task:");
         System.out.println("    " + t.toString());
@@ -49,7 +53,7 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    public void displayDelete(Task t,TaskList tasks) {
+    public void displayDelete(Task t, TaskList tasks) {
         System.out.println(LINE);
         System.out.println("Noted. I've removed this task:");
         System.out.println("    " + t.toString());
