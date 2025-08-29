@@ -25,7 +25,8 @@ public class Event extends Task {
 
     @Override
     public String toStorage() {
-        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + from + " | " + to;
+        return "E | " + (isDone ? "1" : "0") + " | " + description + " | " + from.format(DateTime.INPUT_DATETIME)
+                + " | " + to.format(DateTime.INPUT_DATETIME);
     }
 
     @Override

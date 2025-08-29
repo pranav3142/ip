@@ -68,4 +68,19 @@ public class TaskList {
         return tasks.remove(i);
     }
 
+    /**
+     * Find other tasks with description containing user input.
+     * @param find string to match description with.
+     * @return list of tasks containing matching description to input.
+     */
+    public TaskList find(String find) {
+        TaskList result = new TaskList();
+        for (Task task: tasks) {
+            if (task.getDescription().contains(find)) {
+                result.addTask(task);
+            }
+        }
+        return result;
+    }
+
 }

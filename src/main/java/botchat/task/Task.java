@@ -10,6 +10,13 @@ public abstract class Task {
     /** Completion status of task*/
     protected boolean isDone;
 
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean getDone(String description) {
+        return isDone;
+    }
     /**
      * Constructs a Task with a description.
      *
@@ -57,7 +64,7 @@ public abstract class Task {
      * @return the task as an object.
      */
     public static Task convFromStorage(String line) {
-        String[] parts = line.split("|");
+        String[] parts = line.split("\\|");
 
         String type = parts[0].trim();
         boolean isDone = parts[1].trim().equals("1");
