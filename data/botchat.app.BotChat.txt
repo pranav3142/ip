@@ -1,5 +1,20 @@
 T | 0 | borrow book
+E | 1 | project meeting | 2020-10-13 1900 | 2024-11-10 0000
+T | 0 | help
+T | 0 | borrow book
+D | 0 | return book | 2019-10-15
+E | 0 | project meeting | 2020-10-13 1900 | 2024-11-10 0000
+T | 0 | borrow book
+D | 1 | return book | 2019-10-15
+T | 0 | throw book
+T | 0 | borrow book
+D | 1 | return book | 2019-10-15
 E | 0 | project meeting | 2020-10-13 1900 | 2024-11-10 0000
 T | 0 | throw book
 T | 0 | book
 E | 0 | project book meeting | 2010-11-13 1100 | 2023-05-10 0000
+T | 0 | borrow book
+D | 0 | return book | 2019-10-15
+E | 0 | project meeting | 2020-10-13 1900 | 2024-11-10 0000
+T | 0 | throw book
+T | 0 | book

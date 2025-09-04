@@ -15,7 +15,7 @@ import botchat.ui.Ui;
 public class BotChat {
     private final Store store;
     private final TaskList tasks;
-    private final Ui ui;
+
 
     /**
      * Constructs a new BotChat instance.
@@ -23,41 +23,26 @@ public class BotChat {
      * @param filePath path to where tasks will be loaded and stored.
      */
     public BotChat(String filePath) {
-        ui = new Ui();
+
         store = new Store(filePath);
         tasks = new TaskList(store.loadTasks());
 
     }
-    /**
-     * Runs the BotChat Chatbot.
-     * <p>
-     * Displays welcome message and reads user's commands,
-     * exits on bye command.
-     */
-    public void run() {
-        ui.displayWelcome();
 
-        while (true) {
-            String input = ui.nextLine();
+    public String getResponse(String input) {
+        try{
+            Ui ui = new Ui();
+
             if (Parser.exit(input)) {
-                ui.displayBye();
-                break;
+                Parser.command(input, this.tasks, ui, this.store);
+                return ui.out();
             }
-            try {
-                Parser.command(input, tasks, ui, store);
 
-            } catch (BotChatException e) {
-                System.out.println(e.getMessage());
-            }
+            Parser.command(input, this.tasks, ui, this.store);
+            return ui.out();
+        } catch ( BotChatException e){
+            return e.getMessage();
         }
-    }
-
-    /**
-     * Start point of program.
-     * @param args not in use.
-     */
-    public static void main(String[] args) {
-        new BotChat("./data/botchat.app.BotChat.txt").run();
     }
 
 }
