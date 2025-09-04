@@ -29,6 +29,11 @@ public class BotChat {
 
     }
 
+    /**
+     * Generates a reply from the BotChat for the user input.
+     * @param input the command entered by the user.
+     * @return BotChat's reply to the user for the command.
+     */
     public String getResponse(String input) {
         try{
             Ui ui = new Ui();

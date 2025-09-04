@@ -25,7 +25,7 @@ public class Ui {
 
     private String output;
     /**
-     * Displays the welcome message on app start.
+     * Adds the welcome message on app start to output.
      */
     public void displayWelcome() {
         output = LINE + System.lineSeparator() + "Hello! I'm " + NAME
@@ -42,7 +42,7 @@ public class Ui {
 
 
     /**
-     * Displays the tasks in the list.
+     * Adds the tasks in the list to output.
      * @param tasks list of tasks.
      */
     public void displayList(TaskList tasks) {
@@ -55,7 +55,7 @@ public class Ui {
     }
 
     /**
-     * Displays message indicating task that is marked complete.
+     * Adds message indicating task that is marked complete to output.
      * @param t the task that is marked as done
      */
     public void displayMark(Task t) {
@@ -64,7 +64,7 @@ public class Ui {
     }
 
     /**
-     * Displays message indicating task is marked as not completed.
+     * Adds message indicating task is marked as not completed to output.
      * @param t the task that is marked as not completed.
      */
     public void displayUnmark(Task t) {
@@ -73,7 +73,7 @@ public class Ui {
     }
 
     /**
-     * Displays a message indicating which task is added.
+     * Adds message indicating which task is added to output.
      * @param t the task that is added.
      * @param tasks the list of tasks to add the task to.
      */
@@ -84,7 +84,7 @@ public class Ui {
     }
 
     /**
-     * Displays a message indicating which task is deleted.
+     * Adds message indicating which task is deleted to output.
      * @param t the task that is deleted.
      * @param tasks the list of tasks to delete from.
      */
@@ -95,7 +95,7 @@ public class Ui {
     }
 
     /**
-     * Bye message when program ends.
+     * Adds bye message when program ends to output.
      */
     public void displayBye() {
         output = LINE + System.lineSeparator() + "Bye. Hope to see you again soon!"
@@ -103,7 +103,7 @@ public class Ui {
     }
 
     /**
-     * Message when find command is used.
+     * Adds find command results to output.
      * @param tasks the list containing the find results.
      */
     public void displayFind(TaskList tasks) {
@@ -115,6 +115,10 @@ public class Ui {
         output = output + LINE;
     }
 
+    /**
+     * Displays the output
+     * @return string output
+     */
     public String out(){
         return output;
     }

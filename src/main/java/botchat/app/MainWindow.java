@@ -31,8 +31,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Duke instance */
-    public void setDuke(BotChat d) {
+    /** Injects the Botchat instance */
+    public void setBotChat(BotChat d) {
         botChat = d;
     }
 
