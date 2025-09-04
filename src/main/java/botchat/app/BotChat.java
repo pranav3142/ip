@@ -11,7 +11,6 @@ import botchat.ui.Ui;
  * Responsible for initialising the components and starting
  * the application.
  */
-
 public class BotChat {
     private final Store store;
     private final TaskList tasks;
