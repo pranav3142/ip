@@ -20,6 +20,7 @@ public class Parser {
      * @return index of task in TaskList.
      */
     private static Integer getInt(String input) {
+        assert input != null : "Input cannot be null";
 
         String[] words = input.split(" ");
         return Integer.parseInt(words[1]);
@@ -45,7 +46,13 @@ public class Parser {
      * @throws BotChatException if the command is invalid.
      */
     public static void command(String input, TaskList tasks, Ui ui, Store store) throws BotChatException {
+        assert input != null : "Input cannot be null";
+        assert tasks != null : "Tasks cannot be null";
+        assert ui != null : "Ui cannot be null";
+        assert store != null : "Store cannot be null";
+
         input = input.trim();
+
         if (input.equals("bye")) {
             ui.displayBye();
             return;

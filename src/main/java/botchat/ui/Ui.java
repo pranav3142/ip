@@ -18,12 +18,14 @@ public class Ui {
      * Divider between commands and outputs
      */
     public static final String LINE = "____________________________________";
+
     /**
      * Name of chatbot
      */
     public static final String NAME = "BotChat";
 
     private String output;
+
     /**
      * Adds the welcome message on app start to output.
      */

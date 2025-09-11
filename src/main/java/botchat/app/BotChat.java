@@ -22,9 +22,14 @@ public class BotChat {
      * @param filePath path to where tasks will be loaded and stored.
      */
     public BotChat(String filePath) {
+        assert !filePath.isEmpty() : "File path cannot be empty";
+        assert filePath != null : "filePath is null";
 
         store = new Store(filePath);
+        assert store != null : "Storage not created";
+
         tasks = new TaskList(store.loadTasks());
+        assert tasks != null : "Tasks not created";
 
     }
 
