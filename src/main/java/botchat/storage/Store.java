@@ -21,6 +21,7 @@ public class Store {
      * @param filePath path to the storage file.
      */
     public Store(String filePath) {
+        assert filePath != null : "filePath cannot be null";
         this.filePath = filePath;
     }
 
@@ -31,8 +32,13 @@ public class Store {
      * @return a list of tasks read from the file.
      */
     public ArrayList<Task> loadTasks() {
+        assert this.filePath != null : "filePath cannot be null";
+
         File file = new File(filePath);
+        assert file.exists() : "File does not exist: " + filePath;
+
         ArrayList<Task> tasks = new ArrayList<>();
+        assert tasks != null : "Tasks cannot be null";
 
         File parentFile = file.getParentFile();
         if (parentFile != null) {
@@ -76,6 +82,9 @@ public class Store {
         if (parentFile != null) {
             parentFile.mkdirs();
         }
+
+        assert file.exists() : "File does not exist: " + filePath;
+        assert file.canWrite() : "File is not writable: " + filePath;
 
         try (FileWriter writer = new FileWriter(file)) {
             for (Task task : tasks) {
