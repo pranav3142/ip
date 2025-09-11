@@ -36,17 +36,10 @@ public class BotChat {
     public String getResponse(String input) {
         try{
             Ui ui = new Ui();
-
-            if (Parser.exit(input)) {
-                Parser.command(input, this.tasks, ui, this.store);
-                return ui.out();
-            }
-
             Parser.command(input, this.tasks, ui, this.store);
             return ui.out();
         } catch ( BotChatException e){
             return e.getMessage();
         }
     }
-
 }

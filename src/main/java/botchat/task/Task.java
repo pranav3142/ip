@@ -14,9 +14,6 @@ public abstract class Task {
         return description;
     }
 
-    public boolean getDone(String description) {
-        return isDone;
-    }
     /**
      * Constructs a Task with a description.
      *
@@ -65,34 +62,38 @@ public abstract class Task {
      */
     public static Task convFromStorage(String line) {
         String[] parts = line.split("\\|");
-
         String type = parts[0].trim();
         boolean isDone = parts[1].trim().equals("1");
         String description = parts[2].trim();
 
-        Task task;
-        switch (type) {
-        case "T":
-            task = new Todo(description);
-            break;
-        case "D":
-            String by = parts[3].trim();
-            task = new Deadline(description, by);
-            break;
-        case "E":
-            String from = parts[3].trim();
-            String to = parts[4].trim();
-            task = new Event(description, from, to);
-            break;
-        default:
-            throw new IllegalArgumentException("Invalid task type");
-        }
+        Task task = createTask(type, parts, description);
+        task.applyDone(task, isDone);
 
+        return task;
+    }
+
+    private static Task createTask(String type, String[] parts, String description) {
+        switch (type) {
+            case "T":
+                return new Todo(description);
+            case "D":
+                String by = parts[3].trim();
+                return new Deadline(description, by);
+
+            case "E":
+                String from = parts[3].trim();
+                String to = parts[4].trim();
+                return new Event(description, from, to);
+
+            default:
+                throw new IllegalArgumentException("Invalid task type");
+        }
+    }
+
+    private static void applyDone(Task task, boolean isDone) {
         if (isDone){
             task.markAsDone();
         }
-        return task;
-
     }
 
     @Override
