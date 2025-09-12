@@ -1,8 +1,7 @@
-T | 0 | asfa
 E | 1 | project meeting | 2020-10-13 1900 | 2024-11-10 0000
-D | 0 | return book | 2019-10-15
 E | 0 | project meeting | 2020-10-13 1900 | 2024-11-10 0000
 T | 0 | das
 E | 0 | project book meseting | 2010-11-13 1100 | 2023-05-10 0000
 E | 0 | project meeeting | 2020-10-13 1900 | 2024-11-10 0000
-
+B | 0 | return book | exam
+B | 0 | return woo | 2350

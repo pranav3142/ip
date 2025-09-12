@@ -79,12 +79,13 @@ public abstract class Task {
             case "D":
                 String by = parts[3].trim();
                 return new Deadline(description, by);
-
             case "E":
                 String from = parts[3].trim();
                 String to = parts[4].trim();
                 return new Event(description, from, to);
-
+            case "B":
+                String condition = parts[3].trim();
+                return new DoAfter(description, condition);
             default:
                 throw new IllegalArgumentException("Invalid task type");
         }

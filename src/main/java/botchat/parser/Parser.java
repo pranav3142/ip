@@ -2,11 +2,7 @@ package botchat.parser;
 
 import botchat.app.BotChatException;
 import botchat.storage.Store;
-import botchat.task.Deadline;
-import botchat.task.Event;
-import botchat.task.Task;
-import botchat.task.TaskList;
-import botchat.task.Todo;
+import botchat.task.*;
 import botchat.ui.Ui;
 
 /**
@@ -64,8 +60,27 @@ public class Parser {
         if (commandEvent(input, tasks, ui, store)) return;
         if (commandDelete(input, tasks, ui, store)) return;
         if (commandFind(input, tasks, ui)) return;
+        if (commandDoAfter(input, tasks, ui, store)) return;
 
         throw new BotChatException("Unknown command: " + input);
+    }
+
+    private static boolean commandDoAfter(String input, TaskList tasks, Ui ui, Store store) throws BotChatException {
+        if (!input.startsWith("doafter")){
+            return false;
+        }
+        String removeCommand = input.substring(8).trim();
+        String[] words = removeCommand.split("/after");
+
+        if (words.length != 2 || words[1].isEmpty()){
+            throw new BotChatException("OH NO! doafter is missing a condition");
+        }
+
+        Task task = new DoAfter(words[0].trim(), words[1].trim());
+        tasks.addTask(task);
+        ui.displayAdd(task, tasks);
+        store.saveTasks(tasks.getTasks());
+        return true;
     }
 
     private static boolean commandBye(String input, Ui ui) {
