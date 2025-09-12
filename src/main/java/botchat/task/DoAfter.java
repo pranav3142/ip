@@ -18,10 +18,6 @@ public class DoAfter extends Task {
         this.condition = condition;
     }
 
-    public String getCondition() {
-        return condition;
-    }
-
     @Override
     public String toStorage(){
         return "B | " + (isDone ? "1" : "0") + " | " + description + " | " + condition;
