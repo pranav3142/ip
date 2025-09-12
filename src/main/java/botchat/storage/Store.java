@@ -41,27 +41,64 @@ public class Store {
      * @param tasks the list of tasks to be stored.
      */
     public void saveTasks(ArrayList<Task> tasks) {
-        File file = new File(filePath);
+        assert tasks != null : "tasks cannot be null";
+        assert this.filePath != null : "filePath cannot be null";
 
-        File parentFile = file.getParentFile();
-        if (parentFile != null) {
-            parentFile.mkdirs();
+        Path path = Path.of(this.filePath);
+        ensureFileWritable(path);
+        writeTasks(tasks);
+    }
+
+    /**
+     * Ensures that the file is ready to be written
+     * <p>
+     *     Creates parent dirctories if they do not exist and creates
+     *     the file to be written if it is missing
+     * </p>
+     *
+     * @param path the path to the file
+     */
+    private void ensureFileWritable(Path path) {
+        assert path != null : "path cannot be null";
+
+        try{
+            if(path.getParent() != null) {
+                Files.createDirectories(path.getParent());
+            }
+            if(!Files.exists(path)) {
+                Files.createFile(path);
+            }
+        } catch (IOException e) {
+            throw new UncheckedIOException("Failed to write to task ",e);
         }
+    }
 
-        assert file.exists() : "File does not exist: " + filePath;
-        assert file.canWrite() : "File is not writable: " + filePath;
+    /**
+     * Writes the given list of tasks to the file
+     * @param tasks the list of tasks
+     */
+    private void writeTasks(ArrayList<Task> tasks) {
+        File file = new File(filePath);
+        assert file != null : "file cannot be null";
 
         try (FileWriter writer = new FileWriter(file)) {
             for (Task task : tasks) {
                 writer.write(task.toStorage() + "\n");
-
             }
         } catch (IOException e) {
             System.out.println("Error while saving tasks: " + e.getMessage());
         }
     }
 
+    /**
+     * Ensure File is ready to be read from
+     * Creates a file and directory respectively if they
+     * are missing.
+     * @param path the path to the file to be read from
+     */
     public void ensureFileReady(Path path) {
+        assert path != null : "path cannot be null";
+
         try{
             if (path.getParent() != null){
                 Files.createDirectories(path.getParent());
@@ -74,8 +111,17 @@ public class Store {
         }
     }
 
+    /**
+     * Reads the task from the file to load into storage
+     * @param path the path to the file
+     * @return the list of tasks read from the file
+     */
     public ArrayList<Task> readTasks(Path path) {
+        assert path != null : "path cannot be null";
+
         ArrayList<Task> tasks = new ArrayList<>();
+        assert tasks != null : "tasks cannot be null";
+
         Scanner scanner = null;
         try{
             scanner = new Scanner(path.toFile());
@@ -91,6 +137,5 @@ public class Store {
         }
         return tasks;
     }
-
 
 }
