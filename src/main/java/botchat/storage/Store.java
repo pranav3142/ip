@@ -2,12 +2,11 @@ package botchat.storage;
 
 import botchat.task.Task;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.nio.file.Path;
 
 /**
  * Handles the loading and storing of the tasks to hard drive.
@@ -32,43 +31,9 @@ public class Store {
      * @return a list of tasks read from the file.
      */
     public ArrayList<Task> loadTasks() {
-        assert this.filePath != null : "filePath cannot be null";
-
-        File file = new File(filePath);
-        assert file.exists() : "File does not exist: " + filePath;
-
-        ArrayList<Task> tasks = new ArrayList<>();
-        assert tasks != null : "Tasks cannot be null";
-
-        File parentFile = file.getParentFile();
-        if (parentFile != null) {
-            parentFile.mkdirs();
-        }
-
-        if(!file.exists()) {
-            try{
-                file.createNewFile();
-            }catch (IOException e){
-                System.out.println(e.getMessage());
-
-            }
-            return tasks;
-        }
-
-        try(Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine().trim();
-                if (line.isEmpty()) {
-                    continue;
-                }
-
-                tasks.add(Task.convFromStorage(line));
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("No file found");
-        }
-        return tasks;
-
+        Path path = Path.of(filePath);
+        ensureFileReady(path);
+        return readTasks(path);
     }
 
     /**
@@ -95,5 +60,37 @@ public class Store {
             System.out.println("Error while saving tasks: " + e.getMessage());
         }
     }
+
+    public void ensureFileReady(Path path) {
+        try{
+            if (path.getParent() != null){
+                Files.createDirectories(path.getParent());
+            }
+            if (Files.notExists(path)){
+                Files.createFile(path);
+            }
+        }catch (IOException e){
+            throw new UncheckedIOException("Failed to prepare file '" + filePath + "'", e);
+        }
+    }
+
+    public ArrayList<Task> readTasks(Path path) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        Scanner scanner = null;
+        try{
+            scanner = new Scanner(path.toFile());
+            while (scanner.hasNextLine()){
+                String line = scanner.nextLine().trim();
+                if (line.isEmpty()) continue;
+                tasks.add(Task.convFromStorage(line));
+            }
+        } catch (FileNotFoundException e){
+            throw new UncheckedIOException("Failed to open file '" + filePath + "'", e);
+        } finally {
+            if (scanner != null) scanner.close();
+        }
+        return tasks;
+    }
+
 
 }
