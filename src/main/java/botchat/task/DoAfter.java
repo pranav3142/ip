@@ -9,7 +9,7 @@ public class DoAfter extends Task {
     private String condition;
 
     /**
-     * Constructs a task that has a description and a deadline.
+     * Constructs a task that has a description and a condition.
      * @param description the String description of a task.
      * @param condition the String condition of when to do a task.
      */

@@ -66,6 +66,16 @@ public class Parser {
         throw new BotChatException("Unknown command: " + input);
     }
 
+    /**
+     * Handles the "doafter" command.
+     *
+     * @param input full user input line
+     * @param tasks full user input line
+     * @param ui instance used to display feedback
+     * @param store persistent storage for tasks
+     * @return {@code true} if this handler recognized the command; {@code false} otherwise
+     * @throws BotChatException if the command is malformed or missing the "/after" condition
+     */
     private static boolean commandDoAfter(String input, TaskList tasks, Ui ui, Store store) throws BotChatException {
         if (!input.startsWith("doafter")){
             return false;
@@ -84,6 +94,12 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Handles the "bye" command
+     * @param input full user input line
+     * @param ui instance used to display feedback
+     * @return {@code true} if the input equals "bye"; {@code false} otherwise
+     */
     private static boolean commandBye(String input, Ui ui) {
         if (!input.equals("bye")) {
             return false;
@@ -92,6 +108,14 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Handles the "list" command.
+     *
+     * @param input full user input line
+     * @param tasks the current task list
+     * @param ui instance used to display feedback
+     * @return {@code true} if the input equals "list"; {@code false} otherwise
+     */
     private static boolean commandList(String input, TaskList tasks, Ui ui) {
         if (!input.equals("list")) {
             return false;
@@ -100,6 +124,14 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Handles the "mark" command.
+     * @param input full user input line
+     * @param tasks the current task list
+     * @param ui instance used to display feedback
+     * @param store persistent storage for tasks
+     * @return {@code true} if this handler recognized the command; {@code false} otherwise
+     */
     private static boolean commandMark(String input, TaskList tasks, Ui ui, Store store) {
         if (!input.startsWith("mark")) {
             return false;
@@ -113,6 +145,15 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Handles the "unmark" command.
+     *
+     * @param input  full user input line
+     * @param tasks the current task list
+     * @param ui  instance used to display feedback
+     * @param store persistent storage for tasks
+     * @return {@code true} if this handler recognized the command; {@code false} otherwise
+     */
     private static boolean commandUnmark(String input, TaskList tasks, Ui ui, Store store) {
         if (!input.startsWith("unmark")) {
             return false;
@@ -127,6 +168,16 @@ public class Parser {
 
     }
 
+    /**
+     * Handles the "todo" command.
+     *
+     * @param input full user input line
+     * @param tasks the current task list
+     * @param ui instance used to display feedback
+     * @param store persistent storage for tasks
+     * @return {@code true} if this handler recognized the command; {@code false} otherwise
+     * @throws BotChatException if the description is missing or empty
+     */
     private static boolean commandTodo(String input, TaskList tasks, Ui ui, Store store) throws BotChatException {
         if (!input.startsWith("todo")) {
             return false;
@@ -143,6 +194,16 @@ public class Parser {
 
     }
 
+    /**
+     * Handles the "deadline" command.
+     *
+     * @param input full user input line
+     * @param tasks the current task list
+     * @param ui instance used to display feedback
+     * @param store persistent storage for tasks
+     * @return {@code true} if this handler recognized the command; {@code false} otherwise
+     * @throws BotChatException if the description or /by value is missing, or the date string is invalid
+     */
     private static boolean commandDeadline(String input, TaskList tasks, Ui ui, Store store) throws BotChatException {
         if (!input.startsWith("deadline")) {
             return false;
@@ -171,6 +232,17 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Handles the "event" command.
+     *
+     * @param input full user input line
+     * @param tasks the current task list
+     * @param ui instance used to display feedback
+     * @param store persistent storage for tasks
+     * @return {@code true} if this handler recognized the command; {@code false} otherwise
+     * @throws BotChatException BotChatException if description is missing, /from or /to are missing/empty,
+     * or date-time strings are invalid
+     */
     private static boolean commandEvent(String input, TaskList tasks, Ui ui, Store store) throws BotChatException {
         if (!input.startsWith("event")) {
             return false;
@@ -211,6 +283,16 @@ public class Parser {
 
     }
 
+    /**
+     * Handles the "delete" command.
+     *
+     * @param input full user input line
+     * @param tasks the current task list
+     * @param ui instance used to display feedback
+     * @param store persistent storage for tasks
+     * @return {@code true} if this handler recognized the command; {@code false} otherwise
+     * @throws BotChatException BotChatException if the command omits a required index
+     */
     private static boolean commandDelete(String input, TaskList tasks, Ui ui, Store store) throws BotChatException {
         if (!input.startsWith("delete")) {
             return false;
@@ -232,6 +314,15 @@ public class Parser {
 
     }
 
+    /**
+     * Handles the "find" command.
+     *
+     * @param input full user input line
+     * @param tasks the current task lis
+     * @param ui instance used to display feedback
+     * @return {@code true} if this handler recognized the command; {@code false} otherwise
+     * @throws BotChatException if the keyword is missing or empty
+     */
     private static boolean commandFind(String input, TaskList tasks, Ui ui) throws BotChatException {
         if (!input.startsWith("find")) {
             return false;

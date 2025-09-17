@@ -32,7 +32,6 @@ public class DateTime {
         }
 
         try {
-
             LocalDate.parse(s, INPUT_DATE);
         } catch (DateTimeParseException e) {
             throw new BotChatException(
