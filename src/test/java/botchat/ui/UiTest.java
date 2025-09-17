@@ -37,7 +37,8 @@ class UiTest {
         ui.displayWelcome();
         String expected = Ui.LINE + NL +
                 "Hello! I'm " + Ui.NAME + NL +
-                "What can I do for you?" + Ui.LINE + NL;
+                "What can I do for you?" + NL +
+                Ui.LINE + NL;
         assertEquals(expected, ui.out());
     }
 

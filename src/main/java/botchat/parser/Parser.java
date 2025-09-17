@@ -4,6 +4,7 @@ import botchat.app.BotChatException;
 import botchat.storage.Store;
 import botchat.task.*;
 import botchat.ui.Ui;
+import botchat.util.DateTime;
 
 /**
  * Parses user inputs from BotChat into commands.
@@ -151,16 +152,19 @@ public class Parser {
         }
 
         String removeDeadline = input.substring(9).trim();
-        String[] remaining = removeDeadline.split("/by");
+        String[] remainingCommand = removeDeadline.split("/by");
 
-        if (remaining.length < 2) {
+        if (remainingCommand.length < 2) {
             throw new BotChatException("OH NO! deadline is missing a deadline");
         }
-        if (remaining[1].trim().isEmpty()) {
+        if (remainingCommand[1].trim().isEmpty()) {
             throw new BotChatException("OH NO! deadline is missing a deadline");
         }
 
-        Task t = new Deadline(remaining[0].trim(), remaining[1].trim());
+        //Checks if date is in correct format;
+        DateTime.validateDateString(remainingCommand[1]);
+
+        Task t = new Deadline(remainingCommand[0].trim(), remainingCommand[1].trim());
         tasks.addTask(t);
         ui.displayAdd(t, tasks);
         store.saveTasks(tasks.getTasks());
@@ -195,6 +199,9 @@ public class Parser {
         if (to.isEmpty() || from.isEmpty()) {
             throw new BotChatException("OH NO! event is missing a from or to date/time");
         }
+
+        DateTime.validateDateTimeString(to);
+        DateTime.validateDateTimeString(from);
 
         Task t = new Event(description, from, to);
         tasks.addTask(t);
