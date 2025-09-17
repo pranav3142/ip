@@ -29,9 +29,11 @@ public class Ui {
     /**
      * Adds the welcome message on app start to output.
      */
-    public void displayWelcome() {
+    public String displayWelcome() {
         output = LINE + System.lineSeparator() + "Hello! I'm " + NAME
-                + System.lineSeparator() + "What can I do for you?" + LINE + System.lineSeparator();
+                + System.lineSeparator() + "What can I do for you?" + System.lineSeparator()
+                + LINE + System.lineSeparator();
+        return output;
     }
 
     /**

@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private BotChat botChat = new BotChat("./data/botchat.app.BotChat.txt");
+    private BotChat botChat = new BotChat("data/botchat.app.BotChat.txt");
 
     @Override
     public void start(Stage stage) {

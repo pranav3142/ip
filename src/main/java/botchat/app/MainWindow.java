@@ -1,6 +1,9 @@
 package botchat.app;
+
 import botchat.parser.Parser;
+import botchat.ui.Ui;
 import javafx.application.Platform;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -23,8 +26,8 @@ public class MainWindow extends AnchorPane {
 
     private BotChat botChat;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpeg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bot.jpeg"));
 
     @FXML
     public void initialize() {
@@ -34,6 +37,12 @@ public class MainWindow extends AnchorPane {
     /** Injects the Botchat instance */
     public void setBotChat(BotChat d) {
         botChat = d;
+        Ui ui = new Ui();
+        String welcome = ui.displayWelcome();
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(welcome,dukeImage)
+        );
+
     }
 
     /**
@@ -43,7 +52,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = "BotChat: " + botChat.getResponse(input);
+        String response = "BotChat: " + System.lineSeparator() + botChat.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
