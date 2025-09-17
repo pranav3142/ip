@@ -72,6 +72,15 @@ public abstract class Task {
         return task;
     }
 
+    /**
+     * Creates a Task instance based on the given task type and its parts.
+     *
+     * @param type the task type code (e.g., "T", "D", "E", "B")
+     * @param parts the split components of the serialized task string; must contain
+     *              sufficient elements depending on the task type
+     * @param description the task description text
+     * @return a new Task object of the specified type
+     */
     private static Task createTask(String type, String[] parts, String description) {
         switch (type) {
             case "T":
