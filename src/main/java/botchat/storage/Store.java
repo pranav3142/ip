@@ -2,11 +2,16 @@ package botchat.storage;
 
 import botchat.task.Task;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.nio.file.Path;
+
 
 /**
  * Handles the loading and storing of the tasks to hard drive.
@@ -61,15 +66,15 @@ public class Store {
     private void ensureFileWritable(Path path) {
         assert path != null : "path cannot be null";
 
-        try{
-            if(path.getParent() != null) {
+        try {
+            if (path.getParent() != null) {
                 Files.createDirectories(path.getParent());
             }
-            if(!Files.exists(path)) {
+            if (!Files.exists(path)) {
                 Files.createFile(path);
             }
         } catch (IOException e) {
-            throw new UncheckedIOException("Failed to write to task ",e);
+            throw new UncheckedIOException("Failed to write to task ", e);
         }
     }
 
@@ -99,14 +104,14 @@ public class Store {
     public void ensureFileReady(Path path) {
         assert path != null : "path cannot be null";
 
-        try{
-            if (path.getParent() != null){
+        try {
+            if (path.getParent() != null) {
                 Files.createDirectories(path.getParent());
             }
-            if (Files.notExists(path)){
+            if (Files.notExists(path)) {
                 Files.createFile(path);
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             throw new UncheckedIOException("Failed to prepare file '" + filePath + "'", e);
         }
     }
@@ -123,14 +128,14 @@ public class Store {
         assert tasks != null : "tasks cannot be null";
 
         Scanner scanner = null;
-        try{
+        try {
             scanner = new Scanner(path.toFile());
-            while (scanner.hasNextLine()){
+            while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
                 if (line.isEmpty()) continue;
                 tasks.add(Task.convFromStorage(line));
             }
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             throw new UncheckedIOException("Failed to open file '" + filePath + "'", e);
         } finally {
             if (scanner != null) scanner.close();

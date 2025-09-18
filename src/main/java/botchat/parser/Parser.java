@@ -2,7 +2,12 @@ package botchat.parser;
 
 import botchat.app.BotChatException;
 import botchat.storage.Store;
-import botchat.task.*;
+import botchat.task.TaskList;
+import botchat.task.Task;
+import botchat.task.Deadline;
+import botchat.task.Event;
+import botchat.task.Todo;
+import botchat.task.DoAfter;
 import botchat.ui.Ui;
 import botchat.util.DateTime;
 
@@ -52,16 +57,36 @@ public class Parser {
 
         input = input.trim();
 
-        if (commandBye(input, ui)) return;
-        if (commandList(input, tasks, ui)) return;
-        if (commandMark(input, tasks, ui, store)) return;
-        if (commandUnmark(input, tasks, ui, store)) return;
-        if (commandTodo(input, tasks, ui, store)) return;
-        if (commandDeadline(input, tasks, ui, store)) return;
-        if (commandEvent(input, tasks, ui, store)) return;
-        if (commandDelete(input, tasks, ui, store)) return;
-        if (commandFind(input, tasks, ui)) return;
-        if (commandDoAfter(input, tasks, ui, store)) return;
+        if (commandBye(input, ui)) {
+            return;
+        }
+        if (commandList(input, tasks, ui)) {
+            return;
+        }
+        if (commandMark(input, tasks, ui, store)) {
+            return;
+        }
+        if (commandUnmark(input, tasks, ui, store)) {
+            return;
+        }
+        if (commandTodo(input, tasks, ui, store)) {
+            return;
+        }
+        if (commandDeadline(input, tasks, ui, store)) {
+            return;
+        }
+        if (commandEvent(input, tasks, ui, store)) {
+            return;
+        }
+        if (commandDelete(input, tasks, ui, store)) {
+            return;
+        }
+        if (commandFind(input, tasks, ui)) {
+            return;
+        }
+        if (commandDoAfter(input, tasks, ui, store)) {
+            return;
+        }
 
         throw new BotChatException("Unknown command: " + input);
     }
@@ -77,13 +102,13 @@ public class Parser {
      * @throws BotChatException if the command is malformed or missing the "/after" condition
      */
     private static boolean commandDoAfter(String input, TaskList tasks, Ui ui, Store store) throws BotChatException {
-        if (!input.startsWith("doafter")){
+        if (!input.startsWith("doafter")) {
             return false;
         }
         String removeCommand = input.substring(8).trim();
         String[] words = removeCommand.split("/after");
 
-        if (words.length != 2 || words[1].isEmpty()){
+        if (words.length != 2 || words[1].isEmpty()) {
             throw new BotChatException("OH NO! doafter is missing a condition");
         }
 
@@ -241,7 +266,7 @@ public class Parser {
      * @param store persistent storage for tasks
      * @return {@code true} if this handler recognized the command; {@code false} otherwise
      * @throws BotChatException BotChatException if description is missing, /from or /to are missing/empty,
-     * or date-time strings are invalid
+     *      or date-time strings are invalid.
      */
     private static boolean commandEvent(String input, TaskList tasks, Ui ui, Store store) throws BotChatException {
         if (!input.startsWith("event")) {

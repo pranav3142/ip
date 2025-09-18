@@ -39,11 +39,11 @@ public class BotChat {
      * @return BotChat's reply to the user for the command.
      */
     public String getResponse(String input) {
-        try{
+        try {
             Ui ui = new Ui();
             Parser.command(input, this.tasks, ui, this.store);
             return ui.out();
-        } catch ( BotChatException e){
+        } catch (BotChatException e) {
             return e.getMessage();
         }
     }

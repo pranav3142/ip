@@ -123,7 +123,7 @@ public class Ui {
      * Displays the output
      * @return string output
      */
-    public String out(){
+    public String out() {
         return output;
     }
 }

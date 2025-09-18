@@ -10,10 +10,6 @@ public abstract class Task {
     /** Completion status of task*/
     protected boolean isDone;
 
-    public String getDescription() {
-        return description;
-    }
-
     /**
      * Constructs a Task with a description.
      *
@@ -22,6 +18,10 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     /**
@@ -83,25 +83,25 @@ public abstract class Task {
      */
     private static Task createTask(String type, String[] parts, String description) {
         switch (type) {
-            case "T":
-                return new Todo(description);
-            case "D":
-                String by = parts[3].trim();
-                return new Deadline(description, by);
-            case "E":
-                String from = parts[3].trim();
-                String to = parts[4].trim();
-                return new Event(description, from, to);
-            case "B":
-                String condition = parts[3].trim();
-                return new DoAfter(description, condition);
-            default:
-                throw new IllegalArgumentException("Invalid task type");
+        case "T":
+            return new Todo(description);
+        case "D":
+            String by = parts[3].trim();
+            return new Deadline(description, by);
+        case "E":
+            String from = parts[3].trim();
+            String to = parts[4].trim();
+            return new Event(description, from, to);
+        case "B":
+            String condition = parts[3].trim();
+            return new DoAfter(description, condition);
+        default:
+            throw new IllegalArgumentException("Invalid task type");
         }
     }
 
     private static void applyDone(Task task, boolean isDone) {
-        if (isDone){
+        if (isDone) {
             task.markAsDone();
         }
     }

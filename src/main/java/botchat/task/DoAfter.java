@@ -1,6 +1,5 @@
 package botchat.task;
 
-import botchat.util.DateTime;
 
 /**
  * Represents a task that can be done after a certain time or task.
@@ -19,7 +18,7 @@ public class DoAfter extends Task {
     }
 
     @Override
-    public String toStorage(){
+    public String toStorage() {
         return "B | " + (isDone ? "1" : "0") + " | " + description + " | " + condition;
     }
 

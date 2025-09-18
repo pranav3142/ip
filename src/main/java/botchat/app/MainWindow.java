@@ -3,7 +3,6 @@ package botchat.app;
 import botchat.parser.Parser;
 import botchat.ui.Ui;
 import javafx.application.Platform;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -40,7 +39,7 @@ public class MainWindow extends AnchorPane {
         Ui ui = new Ui();
         String welcome = ui.displayWelcome();
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(welcome,dukeImage)
+                DialogBox.getDukeDialog(welcome, dukeImage)
         );
 
     }

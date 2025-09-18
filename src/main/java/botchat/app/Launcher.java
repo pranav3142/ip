@@ -1,4 +1,5 @@
 package botchat.app;
+
 import javafx.application.Application;
 
 /**

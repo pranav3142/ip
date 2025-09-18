@@ -1,7 +1,6 @@
 package botchat.task;
 
 import botchat.util.DateTime;
-
 import java.time.LocalDate;
 
 /**
@@ -27,7 +26,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[D]" + super.toString() + " (by: " + by.format(DateTime.OUTPUT_DATE) + ")";
     }
 }
