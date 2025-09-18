@@ -240,14 +240,7 @@ public class Parser {
         String removeDeadline = input.substring(9).trim();
         String[] remainingCommand = removeDeadline.split("/by");
 
-        if (remainingCommand.length < 2) {
-            throw new BotChatException("OH NO! deadline is missing a deadline");
-        }
-        if (remainingCommand[1].trim().isEmpty()) {
-            throw new BotChatException("OH NO! deadline is missing a deadline");
-        }
-
-        //Checks if date is in correct format;
+        checkLength(remainingCommand, 2 , "OH NO! deadline is missing a deadline");
         DateTime.validateDateString(remainingCommand[1]);
 
         Task t = new Deadline(remainingCommand[0].trim(), remainingCommand[1].trim());
@@ -278,25 +271,14 @@ public class Parser {
 
         String removeEvent = input.substring(6).trim();
         String[] remaining = removeEvent.split("/from");
-
-        if (remaining.length < 2) {
-            throw new BotChatException("OH NO! event must include a /from and /to");
-        }
+        checkLength(remaining , 2 , "OH NO! event must include a /from and /to");
 
         String description = remaining[0].trim();
         String[] remainingDate = remaining[1].split("/to");
-
-        if (remainingDate.length < 2) {
-            throw new BotChatException("OH NO! event must include a /from and /to");
-        }
+        checkLength(remainingDate , 2 , "OH NO! event must include a /from and /to");
 
         String from = remainingDate[0].trim();
         String to = remainingDate[1].trim();
-
-        if (to.isEmpty() || from.isEmpty()) {
-            throw new BotChatException("OH NO! event is missing a from or to date/time");
-        }
-
         DateTime.validateDateTimeString(to);
         DateTime.validateDateTimeString(from);
 
@@ -306,6 +288,12 @@ public class Parser {
         store.saveTasks(tasks.getTasks());
         return true;
 
+    }
+
+    private static void checkLength(String[] input, int length, String message) throws BotChatException {
+        if (input.length < length) {
+            throw new BotChatException(message);
+        }
     }
 
     /**
